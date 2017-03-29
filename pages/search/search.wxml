@@ -1,0 +1,36 @@
+<!--pages/search/search.wxml-->
+<view class="page-header">
+  <input class="page-header-text" placeholder="输入搜索关键词" auto-focus bindchange="search"/>
+</view>
+<!--鼠标滚动，点击滑动则会跳转-->
+<scroll-view class="page-body" scroll-y="true">
+
+  <!--里面内容点击跳转到movie页面,跳转链接中根据点击那个页面的id不同而传入对应的id-->
+  <navigator url="../movie/movie?id={{item.id}}" wx:for="{{movies}}">
+    <view class="item">
+
+      <!--item在这里指的subjects下面的每一个object-->
+      <image src="{{item.images.small}}" class="poster"></image>
+
+      <!--每一行右侧文字区域-->
+      <view class="meta">
+
+        <!--电影题目-->
+        <text class="title">{{item.title}}</text>
+
+        <!--时间-->
+        <text class="sub-title">{{item.original_title}}({{item.year}})</text>
+        <!--导演，可能不止一个，所以用到for循环-->
+        <text class="artists">
+          <!--这里的name名可以不改-->
+          <text wx:for="{{item.directors}}">{{item.name}}</text>
+        </text>
+      </view>
+
+      <!--评分-->
+      <view>
+        <text class="rating">{{item.rating.average}}</text>
+      </view>
+    </view>
+  </navigator>
+</scroll-view>
